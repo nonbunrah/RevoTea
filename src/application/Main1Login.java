@@ -7,9 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Main1Login extends Application {
@@ -30,32 +32,31 @@ public class Main1Login extends Application {
 			
 			VBox root = new VBox();
 			Scene scene = new Scene(root,500,400);
-			
-			Label title = new Label("RevoTea");
+			StackPane titleBackground = new StackPane();
+			VBox rootMinusTitle = new VBox(5);
+	
+			Text title = new Text("RevoTea");
 			title.setFont(new Font("Arial", 48));
-			title.setStyle("-fx-background-color: #d6d6d6");
-			title.setPadding(new Insets(10, 150, 10, 150));
-			title.setLineSpacing(10);
-			root.setAlignment(Pos.CENTER);
+			title.setStyle("-fx-background-color: #d6d6d6" + "-fx-font-weight: bold");
+			titleBackground.setStyle("-fx-background-color: lightgray");
+			rootMinusTitle.setAlignment(Pos.TOP_CENTER);
+			rootMinusTitle.setPadding(new Insets(20, 0, 0, 0));
 			
-			Label user = new Label("User:");
+			titleBackground.getChildren().add(title);
+			
 			TextField userField = new TextField();
-			HBox innerUserHb = new HBox();
-			innerUserHb.getChildren().addAll(user, userField);
-			innerUserHb.setSpacing(10);
+			userField.setPromptText("Username");
 			
-			Label password = new Label("Password:");
 			TextField passField = new TextField();
-			HBox innerPassHb = new HBox();
-			innerUserHb.getChildren().addAll(password, passField);
-			innerUserHb.setSpacing(10);
+			passField.setPromptText("Password");
 			
-			Button login = createButton("login", 100, 50);
-			Button signup = createButton("signup", 100, 50);
-			Button checkout = createButton("checkout", 100, 50);
+			Button login = createButton("login", 70, 30);
+			Button signup = createButton("signup", 70, 30);
+			Button checkout = createButton("checkout", 70, 30);
 		
 			root.setStyle("-fx-background-color: #f8e192");
-			root.getChildren().addAll(title, innerUserHb, innerPassHb, login, signup, checkout);
+			root.getChildren().addAll(titleBackground, rootMinusTitle);
+			rootMinusTitle.getChildren().addAll(userField, passField, login, signup, checkout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
