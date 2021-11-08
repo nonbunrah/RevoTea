@@ -21,7 +21,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class LoginMain extends Application {
 	
 	private final static String title = "Login";
 	
@@ -47,7 +47,6 @@ public class Main extends Application {
 			// set styling and background color for nodes
 			Text title = new Text("RevoTea");
 			title.setFont(new Font("Arial", 48));
-			title.setStyle("-fx-background-color: #d6d6d6" + "-fx-font-weight: bold");
 			titleBackground.setStyle("-fx-background-color: lightgray");
 			
 			// added spacing between nodes
