@@ -39,25 +39,25 @@ public class LoginMain extends Application {
 			
 			// created multiple boxes to group nodes together
 			VBox root = new VBox();
-			Scene scene = new Scene(root,350,500);
+			Scene scene = new Scene(root,500,800);
 			StackPane titleBackground = new StackPane();
 			VBox fields = new VBox(5);
 			VBox buttons = new VBox(5);
 	
 			// set styling and background color for nodes
-			Text title = new Text("RevoTea");
-			title.setFont(new Font("Arial", 48));
+			Text pageTitle = new Text("RevoTea");
+			pageTitle.setFont(new Font("Arial", 48));
 			titleBackground.setStyle("-fx-background-color: lightgray");
 			
 			// added spacing between nodes
-			root.setPadding(new Insets(20, 0, 0, 0));
+			root.setPadding(new Insets(30, 0, 0, 0));
 			fields.setAlignment(Pos.CENTER);
-			fields.setPadding(new Insets(100, 0, 0, 0));
+			fields.setPadding(new Insets(200, 0, 0, 0));
 			buttons.setAlignment(Pos.CENTER);
-			buttons.setPadding(new Insets(50, 0, 0, 0));
+			buttons.setPadding(new Insets(100, 0, 0, 0));
 			
 			// added title to shape so we can have background color for application title
-			titleBackground.getChildren().add(title);
+			titleBackground.getChildren().add(pageTitle);
 			
 			// username textbox
 			TextField userField = new TextField();
@@ -87,6 +87,7 @@ public class LoginMain extends Application {
 			buttons.getChildren().addAll(login, signup, checkout);
 			fields.getChildren().addAll(userField, passField);
 			primaryStage.setScene(scene);
+			primaryStage.setTitle(title);
 			primaryStage.show();
 			
 		} catch(Exception e) {
