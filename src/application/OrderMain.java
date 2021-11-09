@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -26,6 +27,7 @@ import javafx.stage.Stage;
 public class OrderMain extends Application {
 	
 	private final static String title = "Order";
+	private int counter = 0; // initial counter value
 	
 	private static Button createButton(String name, double prefW, double prefH) {
 		Button btn = new Button(name);
@@ -41,6 +43,12 @@ public class OrderMain extends Application {
 		imgView.setFitWidth(140);
 		imgView.setFitHeight(70);
 		return btn;
+	}
+	
+	public void btnInc(Button btn, Label lblView) {
+		btn.setOnAction(event -> {
+			lblView.setText("Items in Cart: " + (++counter));
+		});
 	}
 	
 	@Override
@@ -59,62 +67,97 @@ public class OrderMain extends Application {
 			HBox bobaButtonsRow4 = new HBox(3);
 			HBox bobaButtonsRow5 = new HBox(3);
 			VBox bobaButtons = new VBox(5);
+			Label lblView = new Label("Items in Cart: 0");
+			HBox lblHolder = new HBox();
 			
 			// set image path variables
-			Image beelong = new Image(getClass().getResourceAsStream("image/drink/BeeLong.JPG"));
-			Image blackSesameHoji = new Image(getClass().getResourceAsStream("image/drink/Black_Sesam_Hoji.JPG"));
-			Image brownSugarMilk = new Image(getClass().getResourceAsStream("image/drink/brown_sugar_milk.JPG"));
+			Image beelongImg = new Image(getClass().getResourceAsStream("image/drink/BeeLong.JPG"));
+			Image blackSesameHojiImg = new Image(getClass().getResourceAsStream("image/drink/Black_Sesam_Hoji.JPG"));
+			Image brownSugarMilkImg = new Image(getClass().getResourceAsStream("image/drink/brown_sugar_milk.JPG"));
+			Image hongKongImg = new Image(getClass().getResourceAsStream("image/drink/Hong_Kong_MT.JPG"));
+			Image houseCoffeeImg = new Image(getClass().getResourceAsStream("image/drink/House_coffee.JPG"));
+			Image lavenderRoseImg = new Image(getClass().getResourceAsStream("image/drink/Lavender_Rose.JPG"));
+			Image lycheeRefresherImg = new Image(getClass().getResourceAsStream("image/drink/Lychee_refresher.JPG"));
+			Image matchaLatteImg = new Image(getClass().getResourceAsStream("image/drink/Matcha_Latte.JPG"));
+			Image milkTriImg = new Image(getClass().getResourceAsStream("image/drink/Milk_Trifecta.JPG"));
+			Image taroMilkImg = new Image(getClass().getResourceAsStream("image/drink/Taro_milk.JPG"));
+			Image thaiCoffeeImg = new Image(getClass().getResourceAsStream("image/drink/Thai_coffee.JPG"));
+			Image thaiTeaImg = new Image(getClass().getResourceAsStream("image/drink/Thai_tea.JPG"));
+			Image vietCoffeeImg = new Image(getClass().getResourceAsStream("image/drink/Viet_coffee.JPG"));
+			Image watermelonOatImg = new Image(getClass().getResourceAsStream("image/drink/Watermelon_Oat.JPG"));
+			Image yokultImg = new Image(getClass().getResourceAsStream("image/drink/Yokult_Green_Tea.JPG"));
 			
-			Image hongKong = new Image(getClass().getResourceAsStream("image/drink/Hong_Kong_MT.JPG"));
-			Image houseCoffee = new Image(getClass().getResourceAsStream("image/drink/House_coffee.JPG"));
-			Image lavenderRose = new Image(getClass().getResourceAsStream("image/drink/Lavender_Rose.JPG"));
-			Image lycheeRefresher = new Image(getClass().getResourceAsStream("image/drink/Lychee_refresher.JPG"));
-			Image matchaLatte = new Image(getClass().getResourceAsStream("image/drink/Matcha_Latte.JPG"));
-			Image milkTri = new Image(getClass().getResourceAsStream("image/drink/Milk_Trifecta.JPG"));
-			Image taroMilk = new Image(getClass().getResourceAsStream("image/drink/Taro_milk.JPG"));
-			Image thaiCoffee = new Image(getClass().getResourceAsStream("image/drink/Thai_coffee.JPG"));
-			Image thaiTea = new Image(getClass().getResourceAsStream("image/drink/Thai_tea.JPG"));
-			Image vietCoffee = new Image(getClass().getResourceAsStream("image/drink/Viet_coffee.JPG"));
-			Image watermelonOat = new Image(getClass().getResourceAsStream("image/drink/Watermelon_Oat.JPG"));
-			Image yokult = new Image(getClass().getResourceAsStream("image/drink/Yokult_Green_Tea.JPG"));
+			Button beelongBtn = imgButton(beelongImg);
+			Button blackSesameHojiBtn = imgButton(blackSesameHojiImg);
+			Button brownSugarMilkBtn = imgButton(brownSugarMilkImg);
+			Button hongKongBtn = imgButton(hongKongImg);
+			Button houseCoffeeBtn = imgButton(houseCoffeeImg);
+			Button lavenderRoseBtn = imgButton(lavenderRoseImg);
+			Button lycheeRefresherBtn = imgButton(lycheeRefresherImg);
+			Button matchaLatteBtn = imgButton(matchaLatteImg);
+			Button milkTriBtn = imgButton(milkTriImg);
+			Button taroMilkBtn = imgButton(taroMilkImg);
+			Button thaiCoffeeBtn = imgButton(thaiCoffeeImg);
+			Button thaiTeaBtn = imgButton(thaiTeaImg);
+			Button vietCoffeeBtn = imgButton(vietCoffeeImg);
+			Button watermelonOatBtn = imgButton(watermelonOatImg);
+			Button yokultBtn = imgButton(yokultImg);
 			
 			// create image buttons
 			bobaButtonsRow1.getChildren().addAll(
-				imgButton(beelong), 
-				imgButton(blackSesameHoji),
-				imgButton(brownSugarMilk)
+				beelongBtn, 
+				blackSesameHojiBtn,
+				brownSugarMilkBtn
 			);
 			
 			bobaButtonsRow2.getChildren().addAll(
-				imgButton(hongKong),
-				imgButton(houseCoffee),
-				imgButton(lavenderRose)
+				hongKongBtn,
+				houseCoffeeBtn,
+				lavenderRoseBtn
 			);
 			
 			bobaButtonsRow3.getChildren().addAll(
-				imgButton(lycheeRefresher),
-				imgButton(matchaLatte),
-				imgButton(milkTri)
+				lycheeRefresherBtn,
+				matchaLatteBtn,
+				milkTriBtn
 			);
 			
 			bobaButtonsRow4.getChildren().addAll(
-				imgButton(taroMilk),
-				imgButton(thaiCoffee),
-				imgButton(thaiTea)
+				taroMilkBtn,
+				thaiCoffeeBtn,
+				thaiTeaBtn
 			);
 			
 			bobaButtonsRow5.getChildren().addAll(
-				imgButton(vietCoffee),
-				imgButton(watermelonOat),
-				imgButton(yokult)
+				vietCoffeeBtn,
+				watermelonOatBtn,
+				yokultBtn
 			);
 			
-			
+			btnInc(beelongBtn, lblView);
+			btnInc(blackSesameHojiBtn, lblView);
+			btnInc(brownSugarMilkBtn, lblView);
+			btnInc(hongKongBtn, lblView);
+			btnInc(houseCoffeeBtn, lblView);
+			btnInc(lavenderRoseBtn, lblView);
+			btnInc(lycheeRefresherBtn, lblView);
+			btnInc(matchaLatteBtn, lblView);
+			btnInc(milkTriBtn, lblView);
+			btnInc(taroMilkBtn, lblView);
+			btnInc(thaiCoffeeBtn, lblView);
+			btnInc(thaiTeaBtn, lblView);
+			btnInc(vietCoffeeBtn, lblView);
+			btnInc(watermelonOatBtn, lblView);
+			btnInc(yokultBtn, lblView);	
 			
 			// set styling and background color for nodes
 			Text pageTitle = new Text("RevoTea");
 			pageTitle.setFont(new Font("Arial", 48));
 			titleBackground.setStyle("-fx-background-color: lightgray");
+			lblHolder.getChildren().add(lblView);
+			lblHolder.setStyle("-fx-text-alignment: center");
+			lblHolder.setAlignment(Pos.CENTER);
+			lblView.setAlignment(Pos.CENTER);
 			
 			// added spacing between nodes
 			root.setPadding(new Insets(20, 0, 0, 0));
@@ -136,7 +179,7 @@ public class OrderMain extends Application {
 		
 			// added children scenes to parent
 			root.setStyle("-fx-background-color: #f8e192");
-			root.getChildren().addAll(titleBackground, bobaButtons, buttons);
+			root.getChildren().addAll(titleBackground, bobaButtons, lblView, buttons);
 			buttons.getChildren().addAll(viewCart);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle(title);
