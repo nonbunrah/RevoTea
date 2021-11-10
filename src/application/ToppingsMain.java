@@ -9,12 +9,16 @@
 package application;
 	
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -26,6 +30,7 @@ import javafx.stage.Stage;
 public class ToppingsMain extends Application {
 	
 	private final static String title = "Order";
+	private int counter = 0; // initial counter value
 	
 	private static Button createButton(String name, double prefW, double prefH) {
 		Button btn = new Button(name);
@@ -39,9 +44,49 @@ public class ToppingsMain extends Application {
 		ImageView imgView = new ImageView(img);
 		btn.setGraphic(imgView);
 		imgView.setFitWidth(90);
-		imgView.setFitHeight(70);
+		imgView.setFitHeight(80);
 		return btn;
 	}
+	
+	public void btnInc(Button btn, Label lblView) {
+		btn.setOnAction(event -> {
+			lblView.setText("Items in Cart: " + (++counter));
+		});
+	}
+	
+	private GridPane createOrderPane() {
+        // Instantiate a new Grid Pane
+        GridPane gridPane = new GridPane();
+
+        // Position the pane at the center of the screen, both vertically and horizontally
+        gridPane.setAlignment(Pos.CENTER);
+
+        // Set a padding of 20px on each side
+        gridPane.setPadding(new Insets(40, 40, 40, 40));
+
+        // Set the horizontal gap between columns
+        gridPane.setHgap(10);
+
+        // Set the vertical gap between rows
+        gridPane.setVgap(10);
+
+        // Add Column Constraints
+
+        // columnOneConstraints will be applied to all the nodes placed in column one.
+        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, Double.MAX_VALUE);
+        columnOneConstraints.setHalignment(HPos.RIGHT);
+
+        // columnTwoConstraints will be applied to all the nodes placed in column two.
+        ColumnConstraints columnTwoConstraints = new ColumnConstraints(150, 100, Double.MAX_VALUE);
+        columnTwoConstraints.setHalignment(HPos.CENTER);
+        
+        ColumnConstraints columnThreeConstraints = new ColumnConstraints(100, 100, Double.MAX_VALUE);
+        columnThreeConstraints.setHalignment(HPos.LEFT);
+
+        gridPane.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstraints, columnThreeConstraints);
+
+        return gridPane;
+    }
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -49,17 +94,15 @@ public class ToppingsMain extends Application {
 		try {
 			
 			// created multiple boxes to group nodes together
+			Label paneTitle = new Label("Order");
 			VBox root = new VBox();
 			Scene scene = new Scene(root,500,800);
 			StackPane titleBackground = new StackPane();
 			VBox buttons = new VBox(5);
-			HBox bobaButtonsRow1 = new HBox(3);
-			HBox bobaButtonsRow2 = new HBox(3);
-			HBox bobaButtonsRow3 = new HBox(3);
-			HBox bobaButtonsRow4 = new HBox(3);
-			HBox bobaButtonsRow5 = new HBox(3);
-			VBox bobaButtons = new VBox(5);
+			Label lblView = new Label("Items in Cart: 0");
 			HBox lblHolder = new HBox();
+			
+			GridPane gridPane = createOrderPane();
 			
 			// set image path variables
 			Image blackBubbleImg = new Image(getClass().getResourceAsStream("image/topping/Black_bubble.JPG"));
@@ -94,52 +137,37 @@ public class ToppingsMain extends Application {
 			Button whipCreamBtn = imgButton(whipCreamImg);
 			Button whitePearlBtn = imgButton(whitePearlImg);
 			
-			// create image buttons
-			bobaButtonsRow1.getChildren().addAll(
-				blackBubbleBtn, 
-				cheeseCreamBtn,
-				coconutJellyBtn
-			);
-			
-			bobaButtonsRow2.getChildren().addAll(
-				coffeeJellyBtn,
-				grassJellyBtn,
-				greenTeaJellyBtn
-			);
-			
-			bobaButtonsRow3.getChildren().addAll(
-				lycheePoppingBtn,
-				mangoJellyBtn,
-				mangoPoppingBtn
-			);
-			
-			bobaButtonsRow4.getChildren().addAll(
-				puddingBtn,
-				rainbowJellyBtn,
-				redBeanBtn
-			);
-			
-			bobaButtonsRow5.getChildren().addAll(
-				strawberryPoppingBtn,
-				whipCreamBtn,
-				whitePearlBtn
-			);
+	        gridPane.add(blackBubbleBtn, 0,1);
+	        gridPane.add(cheeseCreamBtn, 1,1);
+	        gridPane.add(coconutJellyBtn, 2,1);
+	        gridPane.add(coffeeJellyBtn, 0, 2);
+	        gridPane.add(grassJellyBtn, 1, 2);
+	        gridPane.add(greenTeaJellyBtn, 2, 2);
+	        gridPane.add(lycheePoppingBtn, 0, 3);
+	        gridPane.add(mangoJellyBtn, 1, 3);
+	        gridPane.add(mangoPoppingBtn, 2, 3);
+	        gridPane.add(puddingBtn, 0, 4);
+	        gridPane.add(rainbowJellyBtn, 1, 4);
+	        gridPane.add(redBeanBtn, 2, 4);
+	        gridPane.add(strawberryPoppingBtn, 0, 5);
+	        gridPane.add(whipCreamBtn, 1, 5);
+	        gridPane.add(whitePearlBtn, 2, 5);
+	        gridPane.add(paneTitle, 0,0,2,1);
 			
 			// set styling and background color for nodes
 			Text pageTitle = new Text("RevoTea");
 			pageTitle.setFont(new Font("Arial", 48));
 			titleBackground.setStyle("-fx-background-color: lightgray");
+			lblHolder.getChildren().add(lblView);
 			lblHolder.setStyle("-fx-text-alignment: center");
 			lblHolder.setAlignment(Pos.CENTER);
+			lblView.setAlignment(Pos.CENTER);
+			paneTitle.setAlignment(Pos.CENTER);
 			
 			// added spacing between nodes
 			root.setPadding(new Insets(20, 0, 0, 0));
 			buttons.setAlignment(Pos.CENTER);
 			buttons.setPadding(new Insets(50, 0, 0, 0));
-			
-			bobaButtons.getChildren().addAll(bobaButtonsRow1, bobaButtonsRow2, bobaButtonsRow3, bobaButtonsRow4, bobaButtonsRow5);
-			bobaButtons.setAlignment(Pos.CENTER);
-			bobaButtons.setPadding(new Insets(50, 0, 0, 80));
 			
 			// added title to shape so we can have background color for application title
 			titleBackground.getChildren().add(pageTitle);
@@ -152,7 +180,7 @@ public class ToppingsMain extends Application {
 		
 			// added children scenes to parent
 			root.setStyle("-fx-background-color: #f8e192");
-			root.getChildren().addAll(titleBackground, bobaButtons, buttons);
+			root.getChildren().addAll(titleBackground, gridPane, buttons);
 			buttons.getChildren().addAll(viewCart);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle(title);
