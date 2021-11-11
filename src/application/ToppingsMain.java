@@ -15,6 +15,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -43,8 +46,8 @@ public class ToppingsMain extends Application {
 		Button btn = new Button();
 		ImageView imgView = new ImageView(img);
 		btn.setGraphic(imgView);
-		imgView.setFitWidth(90);
-		imgView.setFitHeight(80);
+		imgView.setFitWidth(70);
+		imgView.setFitHeight(65);
 		return btn;
 	}
 	
@@ -101,6 +104,29 @@ public class ToppingsMain extends Application {
 			VBox buttons = new VBox(5);
 			Label lblView = new Label("Items in Cart: 0");
 			HBox lblHolder = new HBox();
+			
+			Slider sweetnessSlider = new Slider(0, 100, 50);
+			sweetnessSlider.setMajorTickUnit(25);
+			sweetnessSlider.setMinorTickCount(0);
+			sweetnessSlider.setShowTickLabels(true);
+			sweetnessSlider.setSnapToTicks(true);
+			
+			ToggleGroup groupRadio = new ToggleGroup();
+
+			RadioButton rb1 = new RadioButton("More Ice");
+			rb1.setPadding(new Insets(20, 0, 0, 0));
+			rb1.setToggleGroup(groupRadio);
+			rb1.setSelected(true);
+
+			RadioButton rb2 = new RadioButton("Medium Ice");
+			rb2.setToggleGroup(groupRadio);
+			 
+			RadioButton rb3 = new RadioButton("Less Ice");
+			rb3.setToggleGroup(groupRadio);
+			
+			Double sweetnessValue = sweetnessSlider.getValue();
+			Label sweetnessValueLabel = new Label("Sweetness Value: " + sweetnessValue.toString());
+			// need to create function that changes this value on change
 			
 			GridPane gridPane = createOrderPane();
 			
@@ -180,7 +206,7 @@ public class ToppingsMain extends Application {
 		
 			// added children scenes to parent
 			root.setStyle("-fx-background-color: #f8e192");
-			root.getChildren().addAll(titleBackground, gridPane, buttons);
+			root.getChildren().addAll(titleBackground, gridPane, sweetnessValueLabel, sweetnessSlider, rb1, rb2, rb3, buttons);
 			buttons.getChildren().addAll(viewCart);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle(title);
